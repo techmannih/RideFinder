@@ -6,11 +6,6 @@ const userSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
-  user_id: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   user_location: {
     type: String,
     required: true,
@@ -26,7 +21,7 @@ const userSchema = new mongoose.Schema({
   vehicle_info: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Car",
+      ref: "Vehicle",
     },
   ],
 });

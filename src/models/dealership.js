@@ -22,10 +22,10 @@ const dealershipSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
-  cars: [
+  vehicles: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Car",
+      ref: "Vehicle",
     },
   ],
   deals: [
