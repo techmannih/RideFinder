@@ -24,6 +24,18 @@ const userSchema = new mongoose.Schema({
       ref: "Vehicle",
     },
   ],
+  sold_vehicle_info: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SoldVehicle",
+    },
+  ],
+  deals: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Deal",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -6,7 +6,7 @@ const soldVehicleSchema = new mongoose.Schema({
     ref: "Vehicle",
     required: true,
   },
-  vehicle_info: {
+  soldVehicle_info: {
     type: mongoose.Schema.Types.Mixed,
     required: true,
   },
