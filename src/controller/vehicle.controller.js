@@ -1,7 +1,8 @@
+import Deal from "@/models/deal";
 const Vehicle = require("../models/vehicle");
 
 // Create and Save a new Vehicle
-exports.createVehicle = async (req, res) => {
+export const createVehicle = async (req, res) => {
   try {
     // Validate request
     if (!req.body.type) {
@@ -26,7 +27,6 @@ exports.createVehicle = async (req, res) => {
     });
   }
 };
-
 // Retrieve all Vehicles from the database.
 export const getVehicles = async (req, res) => {
   try {
@@ -38,22 +38,21 @@ export const getVehicles = async (req, res) => {
     });
   }
 };
-
 // Find a single Vehicle with an id
-
-export const getVehiclById = async (req, res) => {
-  const { id } = req.query; // Use req.query for dynamic routes in Next.js API routes
-  console.log(id);
+export const getDealsByVehicleId = async (req, res) => {
+  const { vehicleId } = req.query; // Use req.query for dynamic routes in Next.js API routes
+  console.log(vehicleId);
 
   try {
-    const vehicle = await Vehicle.findById(id);
-    if (!vehicle) {
-      res.status(404).send({ message: "Not found Vehicle with id " + id });
+    const deals = await Deal.find({ vehicleId: vehicleId });
+    if (!deals || deals.length === 0) {
+      res.status(404).send({ message: "No deals found for Vehicle with id " + vehicleId });
     } else {
-      res.send(vehicle);
+      res.send(deals);
     }
   } catch (err) {
-    res.status(500).send({ message: "Error retrieving Vehicle with id=" + id });
+    console.error("Error retrieving deals:", err);
+    res.status(500).send({ message: "Error retrieving deals for Vehicle with id " + vehicleId });
   }
 };
 // update a vehicle details by id
@@ -83,7 +82,6 @@ export const updateVehicle = async (req, res) => {
     });
   }
 };
-
 // Get vehicles by user id
 export const getVehicleByUserId = async (req, res) => {
   const userId = req.query.userId; // Extract userId from req.query
