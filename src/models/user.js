@@ -18,24 +18,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  vehicle_info: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Vehicle",
-    },
-  ],
-  sold_vehicle_info: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SoldVehicle",
-    },
-  ],
-  deals: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Deal",
-    },
-  ],
 });
 
 // Check if the model already exists to avoid OverwriteModelError
