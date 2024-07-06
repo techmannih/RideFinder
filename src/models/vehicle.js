@@ -17,6 +17,15 @@ const vehicleSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
 });
 
-module.exports = mongoose.model("Vehicle", vehicleSchema);
+// Check if the model already exists to avoid OverwriteModelError
+const Vehicle =
+  mongoose.models.Vehicle || mongoose.model("Vehicle", vehicleSchema);
+
+module.exports = Vehicle;
