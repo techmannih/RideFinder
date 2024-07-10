@@ -1,5 +1,6 @@
 // redux/actions/userActions.js
 import { SET_USER, CLEAR_USER } from "../constants/actionTypes";
+import { toast } from "react-hot-toast";
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -26,8 +27,10 @@ export const loginUser = (credentials) => async (dispatch) => {
 
     const data = await response.json();
     dispatch(setUser(data.user));
+    toast.success("Login successful");
   } catch (error) {
     console.error("Login failed:", error);
+    toast.error("Login failed: " + error.message);
   }
 };
 
@@ -45,11 +48,12 @@ export const signupUser = (userData) => async (dispatch) => {
     if (!response.ok) {
       throw new Error("Signup failed");
     }
-    console.log(response);
+
     const data = await response.json();
-    console.log(data);
     dispatch(setUser(data.user));
+    toast.success("Signup successful");
   } catch (error) {
     console.error("Signup failed:", error);
+    toast.error("Signup failed: " + error.message);
   }
 };

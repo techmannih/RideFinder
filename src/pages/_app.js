@@ -1,13 +1,12 @@
-// pages/_app.js
-import { Provider } from 'react-redux';
-import store from '../redux/store';
-import './globals.css';
+// _app.js or main app component
+import { Toaster } from "react-hot-toast";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
+    <>
+      <Toaster position="top-right" />
       <Component {...pageProps} />
-    </Provider>
+    </>
   );
 }
 
