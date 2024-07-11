@@ -7,9 +7,9 @@ import Navbar from "../components/Navbar/navbar"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
+    <Provider store={store} >
       <Toaster position="top-right" />
-      <Navbar />
+      <Navbar  />
       <Component {...pageProps} />
     </Provider>
   );

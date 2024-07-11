@@ -18,10 +18,7 @@ export default function Navbar() {
   const router = useRouter();
 
   return (
-    <Disclosure
-      as="nav"
-      className="bg-transparent border-b-2 sticky top-0 z-50"
-    >
+    <Disclosure as="nav" className="bg-transparent border-b-2 sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -46,8 +43,8 @@ export default function Navbar() {
                     alt="logo"
                   />
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                <div className="flex-1 hidden sm:block">
+                  <div className="flex justify-center space-x-4">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
