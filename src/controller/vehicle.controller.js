@@ -39,20 +39,25 @@ export const getVehicles = async (req, res) => {
   }
 };
 // Find a single Vehicle with an id
-export const getDealsByVehicleId = async (req, res) => {
-  const { vehicleId } = req.query; // Use req.query for dynamic routes in Next.js API routes
-  console.log(vehicleId);
+//  GET /api/vehicle/:id or GET /api/vehicle?id=123 (for Next.js API routes) 
+export const getVehicleById = async (req, res) => {
+  const vehicleId = req.query.id; // Use req.query for dynamic routes in Next.js API routes
+  console.log(`Vehicle ID: ${vehicleId}`);
 
   try {
-    const deals = await Deal.find({ vehicleId: vehicleId });
-    if (!deals || deals.length === 0) {
-      res.status(404).send({ message: "No deals found for Vehicle with id " + vehicleId });
+    const vehicle = await Vehicle.findById(vehicleId);
+    if (!vehicle) {
+      res
+        .status(404)
+        .send({ message: "Not found Vehicle with id " + vehicleId });
     } else {
-      res.send(deals);
+      res.send(vehicle);
     }
   } catch (err) {
-    console.error("Error retrieving deals:", err);
-    res.status(500).send({ message: "Error retrieving deals for Vehicle with id " + vehicleId });
+    console.error("Error retrieving Vehicle:", err);
+    res
+      .status(500)
+      .send({ message: "Error retrieving Vehicle with id " + vehicleId });
   }
 };
 // update a vehicle details by id
