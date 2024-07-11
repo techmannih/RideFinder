@@ -13,26 +13,20 @@ const navigation = [
   { name: "About Us", href: "/about" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export default function Navbar() {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const user = useSelector((state) => state.user.user); // Get user object from state
   const router = useRouter();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
     dispatch(logoutUser());
-
     router.push("/auth/login");
     localStorage.removeItem("token");
   };
+
   return (
-    <Disclosure
-      as="nav"
-      className="bg-transparent border-b-2 sticky top-0 z-50"
-    >
+    <Disclosure as="nav" className="bg-transparent border-b-2 sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -62,12 +56,11 @@ export default function Navbar() {
                       <a
                         key={item.name}
                         href={item.href}
-                        className={classNames(
+                        className={`${
                           router.pathname === item.href
                             ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                        } rounded-md px-3 py-2 text-sm font-medium`}
                         aria-current={
                           router.pathname === item.href ? "page" : undefined
                         }
@@ -117,10 +110,9 @@ export default function Navbar() {
                           {({ active }) => (
                             <a
                               href="/user/profile"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              className={`${
+                                active ? "bg-gray-100" : ""
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               My Profile
                             </a>
@@ -129,24 +121,22 @@ export default function Navbar() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              href="/user/deals"
+                              className={`${
+                                active ? "bg-gray-100" : ""
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               My Deals
                             </a>
                           )}
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
+                          {user && (
                             <a
-                              href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
+                              href={`/vehicle/user/${user.id}`}
+                              className={`${
                                 "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              }`}
                             >
                               My Vehicle
                             </a>
@@ -156,10 +146,9 @@ export default function Navbar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              className={`${
+                                active ? "bg-gray-100" : ""
+                              } block px-4 py-2 text-sm text-gray-700`}
                               onClick={handleLogout}
                             >
                               Log out
@@ -195,12 +184,11 @@ export default function Navbar() {
                   key={item.name}
                   as="a"
                   href={item.href}
-                  className={classNames(
+                  className={`${
                     router.pathname === item.href
                       ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
-                  )}
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white"
+                  } block rounded-md px-3 py-2 text-base font-medium`}
                   aria-current={
                     router.pathname === item.href ? "page" : undefined
                   }

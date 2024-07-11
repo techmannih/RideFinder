@@ -24,7 +24,15 @@ const vehicleReducer = (state = initialState, action) => {
       };
     case CREATE_VEHICLE:
       return { ...state, vehicles: [...state.vehicles, action.payload] };
-
+    case UPDATE_VEHICLE:
+      return {
+        ...state,
+        vehicles: state.vehicles.map((vehicle) =>
+          vehicle._id === action.payload._id ? action.payload : vehicle
+        ),
+      };
+    case FETCH_VEHICLE_BY_USER_ID:
+      return { ...state, userVehicles: action.payload };
     default:
       return state;
   }
