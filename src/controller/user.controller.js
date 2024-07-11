@@ -116,7 +116,9 @@ exports.getProfile = async (req, res) => {
 // user update own profile by userid?
 exports.updateProfile = async (req, res) => {
   const userId = req.user.id;
-  const { email, location, user_info } = req.body;
+  const { 
+    email, 
+    location, user_info } = req.body;
 
   try {
     let user = await User.findById(userId);
