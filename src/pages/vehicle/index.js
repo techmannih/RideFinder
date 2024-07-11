@@ -1,8 +1,7 @@
-export default function Home() {
-  return (
-    <div>
-      <h1>Welcome to the Car Dealership Website</h1>
-      <p>here is vehicle.</p>
-    </div>
-  );
-}
+import React from "react";
+import Vehicle from "../../components/Vehicle/Vehicles";
+const vehicle = () => {
+  return <Vehicle />;
+};
+
+export default vehicle;
