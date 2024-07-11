@@ -25,7 +25,7 @@ export const loginUser = (credentials) => async (dispatch) => {
       throw new Error("Login failed");
     }
     const data = await response.json();
-    localStorage.setItem('token', data.token);
+    localStorage.setItem("token", data.token);
     dispatch(setUser(data.user));
     toast.success("Login successful");
   } catch (error) {
@@ -59,7 +59,56 @@ export const signupUser = (userData) => async (dispatch) => {
 
 // Add this action for logout
 export const logoutUser = () => (dispatch) => {
-  localStorage.removeItem('token');
+  localStorage.removeItem("token");
   dispatch({ type: LOGOUT_USER });
   toast.success("Logout successful");
+};
+
+export const fetchUserProfile = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch("/api/user/profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user profile");
+    }
+
+    const data = await response.json();
+    console.log("Fetched user profile:", data);
+    dispatch(setUser(data));
+  } catch (error) {
+    console.error("Fetching user profile failed:", error);
+    toast.error("Failed to fetch user profile: " + error.message);
+  }
+};
+
+export const updateUserProfile = (userData) => async (dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch("/api/user/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(userData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update user profile");
+    }
+
+    const data = await response.json();
+    dispatch(setUser(data.user));
+    toast.success("Profile updated successfully");
+  } catch (error) {
+    console.error("Updating user profile failed:", error);
+    toast.error("Failed to update user profile: " + error.message);
+  }
 };

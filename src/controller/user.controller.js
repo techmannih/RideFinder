@@ -101,6 +101,7 @@ exports.login = async (req, res) => {
 // user get own profile by userid?
 exports.getProfile = async (req, res) => {
   const userId = req.user.id;
+  console.log("Received get profile request for user:", userId);
 
   try {
     const user = await User.findById(userId);
