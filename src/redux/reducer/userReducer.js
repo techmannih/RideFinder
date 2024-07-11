@@ -1,19 +1,29 @@
 // redux/reducers/authReducer.js
-import { SET_USER, CLEAR_USER } from '../constants/actionTypes';
+import { SET_USER, CLEAR_USER, LOGOUT_USER } from '../constants/actionTypes';
 
 const initialState = {
+  isAuthenticated: false,
   user: null,
 };
 
-const authReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+      };
     case CLEAR_USER:
-      return { ...state, user: null };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+      };
     default:
       return state;
   }
 };
 
-export default authReducer;
+export default userReducer;

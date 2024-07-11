@@ -1,5 +1,5 @@
 // redux/actions/userActions.js
-import { SET_USER, CLEAR_USER } from "../constants/actionTypes";
+import { SET_USER, CLEAR_USER, LOGOUT_USER } from "../constants/actionTypes";
 import { toast } from "react-hot-toast";
 
 export const setUser = (user) => ({
@@ -24,8 +24,8 @@ export const loginUser = (credentials) => async (dispatch) => {
     if (!response.ok) {
       throw new Error("Login failed");
     }
-
     const data = await response.json();
+    localStorage.setItem('token', data.token);
     dispatch(setUser(data.user));
     toast.success("Login successful");
   } catch (error) {
@@ -35,7 +35,6 @@ export const loginUser = (credentials) => async (dispatch) => {
 };
 
 export const signupUser = (userData) => async (dispatch) => {
-  console.log("userdata", userData);
   try {
     const response = await fetch("/api/user/signup", {
       method: "POST",
@@ -56,4 +55,11 @@ export const signupUser = (userData) => async (dispatch) => {
     console.error("Signup failed:", error);
     toast.error("Signup failed: " + error.message);
   }
+};
+
+// Add this action for logout
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch({ type: LOGOUT_USER });
+  toast.success("Logout successful");
 };
