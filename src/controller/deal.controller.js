@@ -82,10 +82,12 @@ exports.getDealsByUserId = async (req, res) => {
   }
 };
 
-exports.getAllDealsByVehicleId = async (req, res) => {
+exports.getDealsByVehicleId = async (req, res) => {
+  console.log("get all deals by vehicle id");
   try {
-    const { vehicleId } = req.params;
-    const deals = await Deal.find({ vehicle_id: vehicleId });
+    const { vehicleId } = req.query;
+
+    const deals = await Deal.find({ vehicleId: vehicleId });
 
     if (!deals.length) {
       return res

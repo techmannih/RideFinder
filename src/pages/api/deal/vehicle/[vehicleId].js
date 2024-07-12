@@ -1,14 +1,22 @@
 // api/vehicle/getDealsByVehicleId.js
 import connectDB from "../../../../utils/db";
-import authMiddleware from "../../../../utils/authMiddleware";
-import { getDealsByVehicleId } from "../../../../controller/vehicle.controller";
+import authMiddleware from "../../../../middleware/authmiddleware";
+import { getDealsByVehicleId } from "../../../../controller/deal.controller";
 
 export default async function handler(req, res) {
   await connectDB();
 
   if (req.method === "GET") {
-    authMiddleware(req, res, async function () {
-      return getDealsByVehicleId(req, res);
+    authMiddleware(req, res, async (err) => {
+      if (err) {
+        return res.status(401).json({ msg: "Unauthorized" });
+      }
+      try {
+        await getDealsByVehicleId(req, res);
+      } catch (error) {
+        console.error("Error in profile request:", error);
+        res.status(500).json({ msg: "Server Error" });
+      }
     });
   } else {
     res.status(405).json({ msg: "Method not allowed" });
