@@ -71,6 +71,13 @@ exports.getDealsByUserId = async (req, res) => {
 
     console.log("deals in backend", deals);
 
+    if (!deals || deals.length === 0) {///////important uncomment krke dekhnas
+      return res.status(404).json({
+        msg: "No deals found for this user",
+        status: "error",
+        statusCode: 404,
+      });
+    }
 
     res.status(200).json({
       data: deals,
@@ -97,12 +104,16 @@ exports.getDealsByVehicleId = async (req, res) => {
 
     const deals = await Deal.find({ vehicleId: vehicleId });
 
-    if (!deals.length) {
-      return res
-        .status(404)
-        .json({ message: "No deals found for this vehicle" });
-    }
-
+    // if (deals.length) {
+    //   return res
+    //     .status(404)
+    //     .json({ message: "No deals found for this vehicle" });
+    // }
+    if (!deals.length) { ///////important uncomment krke dekhna
+        return res
+          .status(404)
+          .json({ message: "No deals found for this vehicle" });
+      }
     res.status(200).json(deals);
   } catch (error) {
     res
