@@ -18,6 +18,7 @@ export default function Navbar() {
   const user = useSelector((state) => state.user.user); // Get user object from state
   const router = useRouter();
   const dispatch = useDispatch();
+  console.log("User object:", user);
 
   const handleLogout = () => {
     dispatch(logoutUser());

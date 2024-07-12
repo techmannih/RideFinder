@@ -23,20 +23,23 @@ const UserDeals = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">User Deals</h2>
+      <h2 className="text-2xl font-bold text-white mb-4">User Deals</h2>
       {userDeals && userDeals.length > 0 ? (
-        <ul>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {userDeals.map((deal) => (
-            <li key={deal._id}>
-              <h3>{deal.title}</h3>
-              <p>{deal.description}</p>
-              <p>Price: {deal.price}</p>
+            <div
+              key={deal._id}
+              className="bg-gray-900 rounded-lg shadow-md p-6 text-white"
+            >
+              <h3 className="text-xl font-bold mb-2">{deal.title}</h3>
+              <p className="text-gray-300 mb-4">{deal.description}</p>
+              <p className="text-gray-300">Price: {deal.price}</p>
               {/* Add more deal details as needed */}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
-        <p>No deals found.</p>
+        <p className="text-white">No deals found.</p>
       )}
     </div>
   );

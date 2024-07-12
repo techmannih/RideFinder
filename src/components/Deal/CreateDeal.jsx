@@ -1,29 +1,31 @@
-// src/components/CreateDealModal.js
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createDeal } from "../../redux/actions/dealsAction";
+import { toast } from "react-hot-toast";
 
-import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createDeal } from '../../redux/actions/dealsAction';
-import { toast } from 'react-hot-toast';
-
-const CreateDealModal = ({ onClose }) => {
+const CreateDealModal = ({ onClose, vehicleId, userId }) => {
   const dispatch = useDispatch();
+  console.log("vehicleId", vehicleId);
+  console.log("userId", userId);
   const { user } = useSelector((state) => state.user);
-  
+  console.log("user", user.id);
   const [dealData, setDealData] = useState({
-    title: '',
-    description: '',
+    title: "",
+    description: "",
     price: 0,
-    user: user.id || '',  // Use the user ID from the Redux state
+    vehicleId: vehicleId,
+    user: userId,
+    dealcreatorId: user.id || "",
     deal_info: {
-      discount: '10%',
-      expiry_date: '2024-12-31',
+      discount: "10%",
+      expiry_date: "2024-12-31",
     },
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'deal_info.discount' || name === 'deal_info.expiry_date') {
-      const key = name.split('.')[1];
+    if (name === "deal_info.discount" || name === "deal_info.expiry_date") {
+      const key = name.split(".")[1];
       setDealData((prevData) => ({
         ...prevData,
         deal_info: {
@@ -39,12 +41,12 @@ const CreateDealModal = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!dealData.user) {
-      toast.error('User ID is missing');
+      toast.error("User ID is missing");
       return;
     }
     dispatch(createDeal(dealData));
-    onClose();
-    toast.success('Deal created successfully');
+    onClose(); // Close modal on submit
+    toast.success("Deal created successfully");
   };
 
   return (
@@ -52,64 +54,100 @@ const CreateDealModal = ({ onClose }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl font-bold mb-4">Create Deal</h2>
         <form onSubmit={handleSubmit}>
+          {/* Title */}
           <div className="mb-4">
-            <label className="block text-gray-700">Title</label>
+            <label
+              htmlFor="title"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Title
+            </label>
             <input
               type="text"
+              id="title"
               name="title"
               value={dealData.title}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+
+          {/* Description */}
           <div className="mb-4">
-            <label className="block text-gray-700">Description</label>
+            <label
+              htmlFor="description"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Description
+            </label>
             <textarea
+              id="description"
               name="description"
               value={dealData.description}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+
+          {/* Price */}
           <div className="mb-4">
-            <label className="block text-gray-700">Price</label>
+            <label
+              htmlFor="price"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Price
+            </label>
             <input
               type="number"
+              id="price"
               name="price"
               value={dealData.price}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+
+          {/* Discount */}
           <div className="mb-4">
-            <label className="block text-gray-700">Discount</label>
+            <label
+              htmlFor="discount"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Discount
+            </label>
             <input
               type="text"
+              id="discount"
               name="deal_info.discount"
               value={dealData.deal_info.discount}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+
+          {/* Expiry Date */}
           <div className="mb-4">
-            <label className="block text-gray-700">Expiry Date</label>
+            <label
+              htmlFor="expiry_date"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Expiry Date
+            </label>
             <input
-              type="text"
+              type="date"
+              id="expiry_date"
               name="deal_info.expiry_date"
               value={dealData.deal_info.expiry_date}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded"
-              required
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
             />
           </div>
+
+          {/* Form actions */}
           <div className="flex justify-end">
             <button
               type="button"
-              onClick={onClose}
+              onClick={onClose} // Close modal on cancel
               className="mr-4 px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
             >
               Cancel

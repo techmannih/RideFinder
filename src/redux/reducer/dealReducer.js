@@ -1,18 +1,17 @@
 // redux/reducers/dealReducer.js
-
 import {
     FETCH_DEALS,
     FETCH_DEAL_BY_ID,
     CREATE_DEAL,
     FETCH_DEALS_BY_USER_ID,
     FETCH_DEALS_BY_VEHICLE_ID,
-  } from "../constants/actionTypes";
+  } from '../constants/actionTypes';
   
   const initialState = {
     deals: [],
     deal: null,
-    userDeals: [], // Make sure userDeals are initialized correctly
-    vehicleDeals: [],
+    userDeals: [],
+    vehicleDeals: [], // Ensure this is defined
   };
   
   const dealReducer = (state = initialState, action) => {
@@ -24,7 +23,7 @@ import {
       case CREATE_DEAL:
         return { ...state, deals: [...state.deals, action.payload] };
       case FETCH_DEALS_BY_USER_ID:
-        return { ...state, userDeals: action.payload }; // Update userDeals correctly
+        return { ...state, userDeals: action.payload };
       case FETCH_DEALS_BY_VEHICLE_ID:
         return { ...state, vehicleDeals: action.payload };
       default:
