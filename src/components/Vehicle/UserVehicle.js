@@ -4,14 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVehicleByUserId } from "../../redux/actions/vehicleAction"; // Import your API function for fetching vehicles
 import CreateVehicleModal from './CreateVehicle';
-
+import Router from "next/router";
 const UserVehicle = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const userId = user ? user.id : null; // Assuming you have access to user ID in Redux state
   const userVehicles = useSelector((state) => state.vehicle.userVehicles); // Assuming your reducer stores fetched vehicles
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+ const router = Router;
   useEffect(() => {
     if (userId) {
       dispatch(fetchVehicleByUserId(userId)); // Dispatch action to fetch vehicles when component mounts
@@ -26,6 +26,9 @@ const UserVehicle = () => {
     setIsModalOpen(false);
   };
 
+  const handleDetailsClick = (vehicleId) => {
+    router.push(`/vehicle/${vehicleId}`);
+  };
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold text-white">Vehicles</h1>
@@ -49,6 +52,10 @@ const UserVehicle = () => {
               {/* Add more details or actions as needed */}
               <div className="mt-4">
                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2">Edit</button>
+                <button className="bg-gray-800 text-white px-4 py-2 rounded-md"
+                        onClick={() => handleDetailsClick(vehicle._id)}
+
+                >details</button>
               </div>
             </div>
           ))}
