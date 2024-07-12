@@ -67,8 +67,12 @@ exports.login = async (req, res) => {
       return res.status(400).json({ msg: "Invalid Credentials" });
     }
 
+    // Log the user object
+    console.log("User found:", user);
+
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log(`Password match for ${email}:`, isMatch);
     if (!isMatch) {
       console.warn(`Invalid login attempt for user ${email}: Incorrect password.`);
       return res.status(400).json({ msg: "Invalid Credentials" });

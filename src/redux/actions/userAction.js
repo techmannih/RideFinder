@@ -12,6 +12,7 @@ export const clearUser = () => ({
 });
 
 export const loginUser = (credentials) => async (dispatch) => {
+  console.log("Dispatching login request with credentials:", credentials);
   try {
     const response = await fetch("/api/user/login", {
       method: "POST",
@@ -22,9 +23,14 @@ export const loginUser = (credentials) => async (dispatch) => {
     });
 
     if (!response.ok) {
-      throw new Error("Login failed");
+      const errorData = await response.json();
+      console.error("Login error response:", errorData);
+      throw new Error(errorData.msg || "Login failed");
     }
+
     const data = await response.json();
+    console.log("Login response data:", data);
+
     localStorage.setItem("token", data.token);
     dispatch(setUser(data.user));
     toast.success("Login successful");

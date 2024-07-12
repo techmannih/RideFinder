@@ -1,4 +1,3 @@
-// components/auth/Login.js
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/userAction";
@@ -12,10 +11,13 @@ const Login = () => {
   const router = useRouter();
 
   const handleLogin = async () => {
+    console.log("Login attempt with email:", email, "and password:", password);
     try {
       await dispatch(loginUser({ email, password }));
+      console.log("Login successful");
       router.push("/"); // Redirect to home page after login
     } catch (error) {
+      console.error("Login failed: ", error);
       toast.error("Login failed: " + error.message);
     }
   };

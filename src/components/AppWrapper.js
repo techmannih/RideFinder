@@ -1,5 +1,3 @@
-// src/components/AppWrapper.js
-
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -10,13 +8,13 @@ const AppWrapper = ({ children }) => {
   const router = useRouter();
 
   useEffect(() => {
-    validateToken(dispatch);
-          // Redirect to login if user is not authenticated
-          const token = localStorage.getItem('token');
-          if (!token) {
-            router.push('/auth/login');
-          }
-  }, [dispatch]);
+    const token = localStorage.getItem('token');
+    if (token) {
+      validateToken(dispatch);
+    } else if (router.pathname !== '/auth/signup' && router.pathname !== '/auth/login') {
+      router.push('/auth/login');
+    }
+  }, [dispatch, router]);
 
   return children;
 };

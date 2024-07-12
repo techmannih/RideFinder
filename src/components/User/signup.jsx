@@ -15,22 +15,16 @@ const Signup = () => {
   const router = useRouter();
 
   const handleSignup = async () => {
+    const user_info = { fullname, age, gender };
+    const signupData = { email, password, location, user_info };
+    console.log("Signup attempt with data:", signupData);
+
     try {
-      await dispatch(
-        signupUser({
-          email,
-          password,
-          location,
-          user_info: {
-            fullname,
-            age: parseInt(age, 10),
-            gender,
-          },
-        })
-      );
-      toast.success("Signup successful");
+      await dispatch(signupUser(signupData));
+      console.log("Signup successful");
       router.push("/auth/login"); // Redirect to login page after signup
     } catch (error) {
+      console.error("Signup failed:", error);
       toast.error("Signup failed: " + error.message);
     }
   };
@@ -106,7 +100,7 @@ const Signup = () => {
         <p className="text-center mt-4 text-sm">
           Already have an account?{" "}
           <a href="/auth/login" className="text-blue-500 hover:underline">
-            Login here
+            Login
           </a>
         </p>
       </div>
