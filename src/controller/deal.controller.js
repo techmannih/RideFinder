@@ -119,3 +119,19 @@ exports.getDealById = async (req, res) => {
       .json({ error: "Internal Server Error", details: error.message });
   }
 };
+
+exports.getAllDeals = async (req, res) => {
+  try {
+    const deals = await Deal.find();
+
+    if (!deals.length) {
+      return res.status(404).json({ message: "No deals found" });
+    }
+
+    res.status(200).json(deals);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
+  }
+}

@@ -1,8 +1,12 @@
-export default function Home() {
+import AllDeals from "../../components/Deal/AllDeals";
+
+
+const Deals = () => {
   return (
     <div>
-      <h1>Welcome to the Car Dealership Website</h1>
-      <p>here is deals.</p>
+      <AllDeals />
     </div>
   );
 }
+
+export default Deals;
