@@ -64,23 +64,31 @@ exports.addDealToDealership = async (req, res) => {
 exports.getDealsByUserId = async (req, res) => {
   try {
     const userId = req.query.userId;
+    console.log("userId", userId);
     const deals = await Deal.find({
       $or: [{ user: userId }, { dealcreatorId: userId }],
     });
 
-    if (!deals.length) {
-      return res
-        .status(404)
-        .json({ message: "No deals found for this dealership" });
-    }
+    console.log("deals in backend", deals);
 
-    res.status(200).json(deals);
+
+    res.status(200).json({
+      data: deals,
+      msg: "Deals fetched successfully",
+      status: "success",
+      statusCode: 200,
+    });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Internal Server Error", details: error.message });
+    console.error("Error fetching deals by user ID:", error);
+    res.status(500).json({
+      msg: "Internal Server Error",
+      status: "error",
+      statusCode: 500,
+      details: error.message,
+    });
   }
 };
+
 
 exports.getDealsByVehicleId = async (req, res) => {
   console.log("get all deals by vehicle id");

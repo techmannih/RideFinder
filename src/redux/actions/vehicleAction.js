@@ -99,6 +99,7 @@ export const updateVehicle = (id, vehicleData) => async (dispatch) => {
 };
 
 export const fetchVehicleByUserId = (userId) => async (dispatch) => {
+  console.log("fetchVehicleByUserId", userId);
   try {
     const token = localStorage.getItem("token");
     const response = await fetch(`/api/vehicle/getuser/${userId}`, {

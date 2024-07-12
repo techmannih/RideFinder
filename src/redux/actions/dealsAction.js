@@ -79,26 +79,30 @@ export const createDeal = (dealData) => async (dispatch) => {
 };
 
 export const fetchDealsByUserId = (userId) => async (dispatch) => {
-  try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${API_URL}/user/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    if (!response.ok) {
-      throw new Error("Failed to fetch deals by user ID");
+    console.log("fetchDealsByUserId", userId);
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`/api/deal/${userId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch deals by user ID");
+      }
+  
+      const data = await response.json();
+      console.log("deals by user ID data", data);
+      
+      dispatch({ type: FETCH_DEALS_BY_USER_ID, payload: data });
+    } catch (error) {
+      console.error("Fetching deals by user ID failed:", error);
+      toast.error("Failed to fetch deals by user ID: " + error.message);
     }
-    const data = await response.json();
-    console.log("deals by user ID data", data);
-    dispatch({ type: FETCH_DEALS_BY_USER_ID, payload: data });
-  } catch (error) {
-    console.error("Fetching deals by user ID failed:", error);
-    toast.error("Failed to fetch deals by user ID: " + error.message);
-  }
-};
+  };
 
 export const fetchDealsByVehicleId = (vehicleId) => async (dispatch) => {
   try {

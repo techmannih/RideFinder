@@ -119,12 +119,12 @@ export default function Navbar() {
                           )}
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
+                        {user && (
                             <a
-                              href="/user/deals"
+                              href={`/deals/user/${user.id}`}
                               className={`${
-                                active ? "bg-gray-100" : ""
-                              } block px-4 py-2 text-sm text-gray-700`}
+                                "block px-4 py-2 text-sm text-gray-700"
+                              }`}
                             >
                               My Deals
                             </a>
