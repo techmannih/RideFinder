@@ -6,7 +6,7 @@ import AppWrapper from '../components/AppWrapper';
 import { Toaster } from 'react-hot-toast';
 import './globals.css';
 import Navbar from '@/components/Navbar/navbar';
-
+import Footer from '@/components/Footer/footer';
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
@@ -14,6 +14,7 @@ function MyApp({ Component, pageProps }) {
         <Navbar />
         <Component {...pageProps} />
         <Toaster />
+        <Footer/>
       </AppWrapper>
     </Provider>
   );

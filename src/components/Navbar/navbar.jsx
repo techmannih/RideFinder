@@ -27,7 +27,7 @@ export default function Navbar() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-black border-b-2 sticky top-0 z-50">
+    <Disclosure as="nav" className="bg-black bg-transparent  sticky top-0 z-50">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -163,13 +163,13 @@ export default function Navbar() {
                   <>
                     <a
                       href="/auth/login"
-                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md text-sm font-medium"
                     >
                       Log in
                     </a>
                     <a
                       href="/auth/signup"
-                      className="ml-4 text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                      className="ml-4 text-gray-300 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md text-sm font-medium"
                     >
                       Sign up
                     </a>
