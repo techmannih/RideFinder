@@ -8,7 +8,7 @@ const CreateDealModal = ({ onClose, vehicleId, userId }) => {
   console.log("vehicleId", vehicleId);
   console.log("userId", userId);
   const { user } = useSelector((state) => state.user);
-  console.log("user", user.id);
+  // console.log("user", user.id);
   const [dealData, setDealData] = useState({
     title: "",
     description: "",
