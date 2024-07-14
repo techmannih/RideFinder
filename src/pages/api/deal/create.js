@@ -1,6 +1,6 @@
 // api/deal/addDealToDealership.js
 import connectDB from "../../../utils/db";
-import authMiddleware from "../../../middleware/Authmiddleware";
+import authMiddleware from "../../../middleware/authmiddleware";
 import { addDealToDealership } from "../../../controller/deal.controller";
 
 export default async function handler(req, res) {

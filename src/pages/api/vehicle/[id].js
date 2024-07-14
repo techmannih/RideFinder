@@ -1,6 +1,6 @@
 // api/vehicle/getVehicleById.js
 import connectDB from "../../../utils/db";
-import authMiddleware from "../../../middleware/Authmiddleware";
+import authMiddleware from "../../../middleware/authmiddleware";
 import { getVehicleById } from "../../../controller/vehicle.controller";
 
 
