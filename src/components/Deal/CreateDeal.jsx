@@ -15,7 +15,7 @@ const CreateDealModal = ({ onClose, vehicleId, userId }) => {
     price: 0,
     vehicleId: vehicleId,
     user: userId,
-    dealcreatorId: user.id || "",
+    dealcreatorId:  "",
     deal_info: {
       discount: "10%",
       expiry_date: "2024-12-31",
