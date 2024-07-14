@@ -1,6 +1,6 @@
 // api/user/update
 import connectDB from "../../../utils/db";
-import authMiddleware from "../../../middleware/authmiddleware";
+import authMiddleware from "../../../middleware/Authmiddleware";
 import { updateProfile } from "../../../controller/user.controller";
 
 export default async function handler(req, res) {

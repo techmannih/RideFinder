@@ -1,6 +1,6 @@
 // api/vehicle/createVehicle.js
 import connectDB from "../../../utils/db";
-import authMiddleware from "../../../middleware/authmiddleware";
+import authMiddleware from "../../../middleware/Authmiddleware";
 import { createVehicle } from "../../../controller/vehicle.controller";
 
 export default async function handler(req, res) {

@@ -1,6 +1,6 @@
 // api/vehicle/updateVehicle.js
 import connectDB from "../../../../utils/db";
-import authMiddleware from "../../../middleware/authmiddleware";
+import authMiddleware from "../../../../middleware/Authmiddleware";
 import { updateVehicle } from "../../../../controller/vehicle.controller";
 
 export default async function handler(req, res) {

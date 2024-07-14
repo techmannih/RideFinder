@@ -1,6 +1,6 @@
 // api/vehicle/getDealsByVehicleId.js
 import connectDB from "../../../../utils/db";
-import authMiddleware from "../../../../middleware/authmiddleware";
+import authMiddleware from "../../../../middleware/Authmiddleware";
 import { getDealsByVehicleId } from "../../../../controller/deal.controller";
 
 export default async function handler(req, res) {

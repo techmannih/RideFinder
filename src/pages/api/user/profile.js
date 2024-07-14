@@ -1,6 +1,6 @@
 // api/user/profile/[userid].js
 import connectDB from "../../../utils/db";
-import authMiddleware from "../../../middleware/authmiddleware"; // Corrected import
+import authMiddleware from "../../../middleware/Authmiddleware"; // Corrected import
 import { getProfile } from "../../../controller/user.controller"; // Corrected import path
 
 export default async function handler(req, res) {
