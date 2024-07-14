@@ -7,7 +7,7 @@ export default function Home() {
         <section className="hero text-center py-16">
           <h1 className="text-4xl font-bold mb-4">Welcome to the Ultimate Car Dealership Experience</h1>
           <p className="text-lg mb-6">Your journey to finding the perfect car starts here. Explore our wide range of vehicles and unbeatable deals tailored just for you.</p>
-          <button onClick={() => window.location.href = '/deals'} className="cta-button bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button onClick={() => window.location.href = '/deals'} className="cta-button border-2 text-gray-400 border-gray-400  hover:bg-gray-700 hover:text-white hover:border-0 font-normal py-2 px-4 rounded">
             View Latest Deals
           </button>
         </section>
