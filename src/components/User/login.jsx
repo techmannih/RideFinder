@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../redux/actions/userAction";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import Link from "next/link";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");

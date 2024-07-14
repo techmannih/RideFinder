@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { signupUser } from "../../redux/actions/userAction";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
