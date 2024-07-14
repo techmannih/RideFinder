@@ -60,9 +60,9 @@ const Login = () => {
         </form>
         <p className="text-center mt-4 text-sm">
           New user?{" "}
-          <a href="/auth/signup" className="text-blue-500 hover:underline">
+          <Link href="/auth/signup" className="text-blue-500 hover:underline">
             Create an account
-          </a>
+          </Link>
         </p>
       </div>
     </div>

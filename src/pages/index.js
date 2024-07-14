@@ -37,10 +37,10 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center">Customer Stories</h2>
           <div className="testimonial-cards grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="testimonial-card bg-gray-800 p-6 rounded-lg">
-              <p>"I found my dream car at an amazing price. The process was seamless and the staff was incredibly helpful!" - Alice</p>
+              <p>I found my dream car at an amazing price. The process was seamless and the staff was incredibly helpful! - Alice</p>
             </div>
             <div className="testimonial-card bg-gray-800 p-6 rounded-lg">
-              <p>"As a dealer, managing my inventory and deals has never been easier. This platform is a game-changer!" - Bob</p>
+              <p>As a dealer, managing my inventory and deals has never been easier. This platform is a game-changer! - Bob</p>
             </div>
           </div>
         </section>
