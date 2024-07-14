@@ -1,4 +1,6 @@
 import React from 'react';
+import Image from 'next/image';
+
 
 export default function Home() {
   return (
@@ -16,17 +18,17 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-center">Why Choose Us?</h2>
           <div className="feature-cards grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="feature-card bg-gray-800 p-6 rounded-lg text-center">
-              <img src="path/to/image1.jpg" alt="Wide Selection of Vehicles" className="w-full h-48 object-cover mb-4 rounded"/>
+              <Image src="path/to/image1.jpg" alt="Wide Selection of Vehicles" className="w-full h-48 object-cover mb-4 rounded"/>
               <h3 className="text-xl font-bold mb-2">Wide Selection of Vehicles</h3>
               <p>From sedans to SUVs, find a variety of vehicles that suit your style and needs.</p>
             </div>
             <div className="feature-card bg-gray-800 p-6 rounded-lg text-center">
-              <img src="path/to/image2.jpg" alt="Unbeatable Prices" className="w-full h-48 object-cover mb-4 rounded"/>
+              <Image src="path/to/image2.jpg" alt="Unbeatable Prices" className="w-full h-48 object-cover mb-4 rounded"/>
               <h3 className="text-xl font-bold mb-2">Unbeatable Prices</h3>
               <p>Enjoy the best prices and deals on all our cars, with flexible financing options.</p>
             </div>
             <div className="feature-card bg-gray-800 p-6 rounded-lg text-center">
-              <img src="path/to/image3.jpg" alt="Trusted by Thousands" className="w-full h-48 object-cover mb-4 rounded"/>
+              <Image src="path/to/image3.jpg" alt="Trusted by Thousands" className="w-full h-48 object-cover mb-4 rounded"/>
               <h3 className="text-xl font-bold mb-2">Trusted by Thousands</h3>
               <p>Join our community of satisfied customers who have found their dream cars with us.</p>
             </div>
