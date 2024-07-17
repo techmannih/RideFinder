@@ -30,7 +30,7 @@ const Vehicles = () => {
   };
 
   return (
-    <div className="bg-black min-h-screen p-6">
+    <div className="bg-black min-h-screen  max-w-7xl p-8 mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold text-white">Vehicles</h1>
         <button
@@ -41,7 +41,7 @@ const Vehicles = () => {
         </button>
       </div>
       {vehicles.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="flex flex-wrap  justify-center items-center max-w-7xl p-8 mx-auto gap-8">
           {vehicles.map((vehicle) => (
             <VehicleCard key={vehicle._id} vehicle={vehicle} onDetailsClick={handleDetailsClick} />
           ))}

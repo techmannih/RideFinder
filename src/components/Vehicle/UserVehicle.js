@@ -3,15 +3,23 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchVehicleByUserId } from "../../redux/actions/vehicleAction"; // Import your API function for fetching vehicles
-import CreateVehicleModal from './CreateVehicle';
+import CreateVehicleModal from "./CreateVehicle";
 import Router from "next/router";
+import {
+  FaTachometerAlt,
+  FaSnowflake,
+  FaChair,
+  FaDoorOpen,
+  FaCar,
+  FaCogs,
+} from "react-icons/fa";
 const UserVehicle = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const userId = user ? user.id : null; // Assuming you have access to user ID in Redux state
   const userVehicles = useSelector((state) => state.vehicle.userVehicles); // Assuming your reducer stores fetched vehicles
   const [isModalOpen, setIsModalOpen] = useState(false);
- const router = Router;
+  const router = Router;
   useEffect(() => {
     if (userId) {
       dispatch(fetchVehicleByUserId(userId)); // Dispatch action to fetch vehicles when component mounts
@@ -30,7 +38,7 @@ const UserVehicle = () => {
     router.push(`/vehicle/${vehicleId}`);
   };
   return (
-    <div className="container mx-auto py-8">
+    <div className="container max-w-7xl p-8 mx-auto">
       <h1 className="text-3xl font-bold text-white">Vehicles</h1>
       <button
         onClick={handleCreateClick}
@@ -39,23 +47,65 @@ const UserVehicle = () => {
         Create Vehicle
       </button>
       {userVehicles.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 text-black">
+        <div className="flex  justify-center items-center">
           {userVehicles.map((vehicle) => (
-            <div key={vehicle._id} className="bg-white rounded-lg shadow-md p-4">
-              <h2 className="text-xl font-semibold mb-2">{vehicle.model}</h2>
-              <p className="text-gray-600 mb-2">{vehicle.name}</p>
-              <div className="mb-2">
-                <p><span className="font-semibold">Type:</span> {vehicle.type}</p>
-                <p><span className="font-semibold">Color:</span> {vehicle.vehicle_info.color}</p>
-                <p><span className="font-semibold">Mileage:</span> {vehicle.vehicle_info.mileage}</p>
+            <div
+              key={vehicle._id}
+              className="border-2 border-gray-700 text-white rounded-xl shadow-md w-96 mx-auto"
+            >
+              <div className="h-60 bg-gray-700 rounded-t-xl relative">
+                <img
+                  src={vehicle.image}
+                  alt={vehicle.name}
+                  className="object-cover w-full h-full rounded-t-xl"
+                />
               </div>
-              {/* Add more details or actions as needed */}
-              <div className="mt-4">
-                <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md mr-2">Edit</button>
-                <button className="bg-gray-800 text-white px-4 py-2 rounded-md"
-                        onClick={() => handleDetailsClick(vehicle._id)}
-
-                >details</button>
+              <h2 className="text-xl font-semibold text-center p-4">
+                {vehicle.name}
+              </h2>
+              <p className="bg-slate-900 text-center text-xl font-normal p-4">
+                Starting at {vehicle.price}
+              </p>
+              <div className="flex justify-center items-center gap-4 p-4">
+                <div className="text-left text-white">
+                  <p className="flex items-center m-1">
+                    <FaCar className="mr-2" />
+                    Type: {vehicle.type}
+                  </p>
+                  <p className="flex items-center m-1">
+                    <FaCogs className="mr-2" />
+                    Model: {vehicle.model}
+                  </p>
+                  <p className="flex items-center m-1">
+                    <FaTachometerAlt className="mr-2" />
+                    Mileage: {vehicle.vehicle_info.mileage}
+                  </p>
+                </div>
+                <div className="text-left text-white">
+                  <p className="flex items-center m-1">
+                    <FaSnowflake className="mr-2" />
+                    AC/Heater: {vehicle.vehicle_info.ac_heater}
+                  </p>
+                  <p className="flex items-center m-1">
+                    <FaChair className="mr-2" />
+                    Seats: {vehicle.vehicle_info.seats}
+                  </p>
+                  <p className="flex items-center m-1">
+                    <FaDoorOpen className="mr-2" />
+                    Doors: {vehicle.vehicle_info.doors}
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-center border-1 rounded-b-xl">
+                <button className=" text-white px-4 py-2 rounded-bl-xl w-full bg-gray-500 ">
+                  Edit
+                </button>
+                <button
+                  className=" text-white px-4 py-2 w-full  border-2 border-gray-500 rounded-br-xl"
+                  onClick={() => handleDetailsClick(vehicle._id)}
+                >
+                  details
+                </button>
               </div>
             </div>
           ))}
