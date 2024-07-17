@@ -15,11 +15,11 @@ const VehicleCard = ({ vehicle, onDetailsClick }) => {
     <div className="border-2 border-gray-700 text-white rounded-xl shadow-md w-64 h-96 flex flex-col">
       <div className="h-40 bg-gray-700 rounded-t-xl relative">
         {/* Example image tag */}
-        <img
+        {/* <img
           src={vehicle.image}  // Assuming vehicle object has an image property
           alt={vehicle.name}   // Alt text for accessibility
           className="object-cover w-full h-full rounded-t-xl"
-        />
+        /> */}
       </div>
       <h2 className="text-xl font-semibold text-center p-2">{vehicle.name}</h2>
       <p className="bg-slate-900 text-center text-xl font-normal p-2">

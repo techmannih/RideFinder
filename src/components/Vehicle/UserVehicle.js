@@ -54,11 +54,11 @@ const UserVehicle = () => {
               className="border-2 border-gray-700 text-white rounded-xl shadow-md w-96 mx-auto"
             >
               <div className="h-60 bg-gray-700 rounded-t-xl relative">
-                <img
+                {/* <img
                   src={vehicle.image}
                   alt={vehicle.name}
                   className="object-cover w-full h-full rounded-t-xl"
-                />
+                /> */}
               </div>
               <h2 className="text-xl font-semibold text-center p-4">
                 {vehicle.name}

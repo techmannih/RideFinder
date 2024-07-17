@@ -47,11 +47,11 @@ const VehicleDetail = () => {
       {vehicleDetails ? (
         <div className="border-2 border-gray-700 text-white rounded-xl shadow-md w-96 mx-auto">
           <div className="h-60 bg-gray-700 rounded-t-xl relative">
-            <img
+            {/* <img
               src={vehicleDetails.image}
               alt={vehicleDetails.name}
               className="object-cover w-full h-full rounded-t-xl"
-            />
+            /> */}
           </div>
           <h2 className="text-xl font-semibold text-center p-4">{vehicleDetails.name}</h2>
           <p className="bg-slate-900 text-center text-xl font-normal p-4">
