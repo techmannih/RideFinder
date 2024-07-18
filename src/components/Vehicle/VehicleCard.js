@@ -29,29 +29,29 @@ const VehicleCard = ({ vehicle, onDetailsClick }) => {
         <div className="text-left text-white">
           <p className="flex items-center m-1">
             <FaCar className="mr-2" />
-            Type: {vehicle.type}
+           {vehicle.type}
           </p>
           <p className="flex items-center m-1">
             <FaCogs className="mr-2" />
-            Model: {vehicle.model}
+             {vehicle.model}
           </p>
           <p className="flex items-center m-1">
             <FaTachometerAlt className="mr-2" />
-            Mileage: {vehicle.vehicle_info.mileage}
+             {vehicle.vehicle_info.mileage}
           </p>
         </div>
         <div className="text-left text-white">
           <p className="flex items-center m-1">
             <FaSnowflake className="mr-2" />
-            AC/Heater: {vehicle.vehicle_info.ac_heater}
+           {vehicle.vehicle_info.ac_heater}
           </p>
           <p className="flex items-center m-1">
             <FaChair className="mr-2" />
-            Seats: {vehicle.vehicle_info.seats}
+            {vehicle.vehicle_info.seats}
           </p>
           <p className="flex items-center m-1">
             <FaDoorOpen className="mr-2" />
-            Doors: {vehicle.vehicle_info.doors}
+             {vehicle.vehicle_info.doors}
           </p>
         </div>
       </div>

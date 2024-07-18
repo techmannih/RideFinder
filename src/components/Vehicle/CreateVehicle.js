@@ -1,4 +1,3 @@
-
 // src/components/CreateVehicleModal.js
 
 import React, { useState } from 'react';
@@ -14,12 +13,16 @@ const CreateVehicleModal = ({ onClose }) => {
     name: '',
     model: '',
     vehicle_info: {
+      price: '',
       color: '',
-      mileage: ''
+      mileage: '',
+      ac_heater: '',
+      seats: '',
+      doors: ''
     },
     user: user.id || ''  // Use the user ID from the Redux state
   });
-console.log("user",user);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name.startsWith('vehicle_info.')) {
@@ -49,7 +52,7 @@ console.log("user",user);
 
   return (
     <div className="fixed inset-0 bg-gray-900 bg-opacity-75 flex justify-center items-center z-50 text-black">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-96 overflow-y-auto max-h-full">
         <h2 className="text-2xl font-bold mb-4">Create Vehicle</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -86,6 +89,17 @@ console.log("user",user);
             />
           </div>
           <div className="mb-4">
+            <label className="block text-gray-700">Price</label>
+            <input
+              type="text"
+              name="vehicle_info.price"
+              value={formData.vehicle_info.price}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
             <label className="block text-gray-700">Color</label>
             <input
               type="text"
@@ -102,6 +116,39 @@ console.log("user",user);
               type="text"
               name="vehicle_info.mileage"
               value={formData.vehicle_info.mileage}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">AC/Heater</label>
+            <input
+              type="text"
+              name="vehicle_info.ac_heater"
+              value={formData.vehicle_info.ac_heater}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Seats</label>
+            <input
+              type="text"
+              name="vehicle_info.seats"
+              value={formData.vehicle_info.seats}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700">Doors</label>
+            <input
+              type="text"
+              name="vehicle_info.doors"
+              value={formData.vehicle_info.doors}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded"
               required
