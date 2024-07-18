@@ -2,6 +2,7 @@
 export const SET_USER = 'SET_USER';
 export const CLEAR_USER = 'CLEAR_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
+export const SET_USER_BY_ID = "SET_USER_BY_ID"; // New action type
 
 export const FETCH_VEHICLES = 'FETCH_VEHICLES';
 export const FETCH_VEHICLE_BY_ID = 'FETCH_VEHICLE_BY_ID';

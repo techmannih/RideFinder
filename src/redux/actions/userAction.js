@@ -1,5 +1,5 @@
 // redux/actions/userActions.js
-import { SET_USER, CLEAR_USER, LOGOUT_USER } from "../constants/actionTypes";
+import { SET_USER, CLEAR_USER, LOGOUT_USER ,SET_USER_BY_ID } from "../constants/actionTypes";
 import { toast } from "react-hot-toast";
 
 export const setUser = (user) => ({
@@ -93,6 +93,33 @@ export const fetchUserProfile = () => async (dispatch) => {
     toast.error("Failed to fetch user profile: " + error.message);
   }
 };
+export const fetchUserProfileById = (userId) => async (dispatch) => {
+ console.log("Fetching user profile by id:", userId);
+  try {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`/api/user/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch user profile");
+    }
+
+    const data = await response.json();
+    console.log("Fetched user profile by Id:", data);
+    dispatch({ type: SET_USER_BY_ID, payload: data });
+  }
+  catch (error) {
+    console.error("Fetching user profile failed:", error);
+    toast.error("Failed to fetch user profile: " + error.message);
+  }
+
+};
+
 
 export const updateUserProfile = (userData) => async (dispatch) => {
   try {

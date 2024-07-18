@@ -141,3 +141,20 @@ exports.updateProfile = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 };
+exports.getProfileById = async (req, res) => {
+  const userId = req.query.userId;
+  console.log("Received get profile request for user:", userId);
+
+  try {
+    const user
+      = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    res.status(200).json(user);
+  }
+  catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "Server error" });
+  }
+}

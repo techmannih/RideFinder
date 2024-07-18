@@ -1,9 +1,10 @@
 // redux/reducers/authReducer.js
-import { SET_USER, CLEAR_USER, LOGOUT_USER } from '../constants/actionTypes';
+import { SET_USER, CLEAR_USER, LOGOUT_USER, SET_USER_BY_ID } from '../constants/actionTypes';
 
 const initialState = {
   isAuthenticated: false,
   user: null,
+  users: [],
 };
 
 const userReducer = (state = initialState, action) => {
@@ -20,6 +21,11 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isAuthenticated: false,
         user: null,
+      };
+    case SET_USER_BY_ID:
+      return {
+        ...state,
+        users: [...state.users, action.payload], // Add the fetched user to the users array
       };
     default:
       return state;

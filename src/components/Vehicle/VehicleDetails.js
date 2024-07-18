@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import { fetchVehicleById } from '../../redux/actions/vehicleAction';
-import { fetchDealsByVehicleId } from '../../redux/actions/dealsAction';
-import CreateDealModal from '../Deal/CreateDeal';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { fetchVehicleById } from "../../redux/actions/vehicleAction";
+import { fetchUserProfileById } from "../../redux/actions/userAction";
+import { fetchDealsByVehicleId } from "../../redux/actions/dealsAction";
+import CreateDealModal from "../Deal/CreateDeal";
 import {
   FaTachometerAlt,
   FaSnowflake,
@@ -11,14 +12,14 @@ import {
   FaDoorOpen,
   FaCar,
   FaCogs,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 
 const VehicleDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useDispatch();
   const vehicleDetails = useSelector((state) => state.vehicle.vehicleDetails);
-  const { user } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.users.find(u => u._id === vehicleDetails?.user));
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -28,7 +29,13 @@ const VehicleDetail = () => {
     }
   }, [id, dispatch]);
 
-  const DealsOnVehiclehandler = (vehicleId) => {
+  useEffect(() => {
+    if (vehicleDetails && vehicleDetails.user) {
+      dispatch(fetchUserProfileById(vehicleDetails.user));
+    }
+  }, [vehicleDetails, dispatch]);
+
+  const DealsOnVehicleHandler = (vehicleId) => {
     dispatch(fetchDealsByVehicleId(vehicleId));
     router.push(`/deals/vehicle/${vehicleId}`);
   };
@@ -41,19 +48,37 @@ const VehicleDetail = () => {
     setIsModalOpen(false);
   };
 
+  const handleUserClick = () => {
+    dispatch(fetchUserProfileById(vehicleDetails.user));
+    router.push(`/user/${vehicleDetails.user}`);
+  };
+
   return (
-    <div className="bg-black min-h-screen  max-w-7xl p-8 mx-auto">
-      <h1 className="text-3xl font-bold text-white mb-6">Vehicle Details</h1>
+    <div className="bg-black min-h-screen max-w-7xl p-8 mx-auto">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-white">Vehicle Details</h1>
+        {user && (
+          <p
+            className="text-xl text-white cursor-pointer"
+            onClick={handleUserClick}
+          >
+            {user.user_info.fullname}
+          </p>
+        )}
+      </div>
       {vehicleDetails ? (
         <div className="border-2 border-gray-700 text-white rounded-xl shadow-md w-96 mx-auto">
           <div className="h-60 bg-gray-700 rounded-t-xl relative">
+            {/* Uncomment and update the src if image is available */}
             {/* <img
               src={vehicleDetails.image}
               alt={vehicleDetails.name}
               className="object-cover w-full h-full rounded-t-xl"
             /> */}
           </div>
-          <h2 className="text-xl font-semibold text-center p-4">{vehicleDetails.name}</h2>
+          <h2 className="text-xl font-semibold text-center p-4">
+            {vehicleDetails.name}
+          </h2>
           <p className="bg-slate-900 text-center text-xl font-normal p-4">
             Starting at {vehicleDetails.price}
           </p>
@@ -89,20 +114,24 @@ const VehicleDetail = () => {
           </div>
           <div className="flex justify-center border-1 rounded-b-xl">
             <button
-              className=" text-white px-4 py-2 rounded-bl-xl w-full  bg-gray-500 "
+              className="text-white px-4 py-2 rounded-bl-xl w-full bg-gray-500"
               onClick={handleCreateClick}
             >
               Add Deal
             </button>
             <button
-              className=" text-white px-4 py-2 w-full  border-2 border-gray-500 rounded-br-xl"
-              onClick={() => DealsOnVehiclehandler(vehicleDetails._id)}
+              className="text-white px-4 py-2 w-full border-2 border-gray-500 rounded-br-xl"
+              onClick={() => DealsOnVehicleHandler(vehicleDetails._id)}
             >
               See Deals
             </button>
           </div>
           {isModalOpen && (
-            <CreateDealModal onClose={handleCloseModal} vehicleId={vehicleDetails._id} userId={vehicleDetails.user} />
+            <CreateDealModal
+              onClose={handleCloseModal}
+              vehicleId={vehicleDetails._id}
+              userId={vehicleDetails.user}
+            />
           )}
         </div>
       ) : (
