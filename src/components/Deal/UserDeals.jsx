@@ -22,7 +22,7 @@ const UserDeals = () => {
   }
 
   return (
-    <div>
+    <div className="bg-black min-h-screen max-w-7xl p-8 mx-auto">
       <h2 className="text-2xl font-bold text-white mb-4">User Deals</h2>
       {userDeals && userDeals.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -24,7 +24,7 @@ const DealDetails = () => {
   }
 
   return (
-    <div className="bg-black min-h-screen p-5">
+    <div className="bg-black min-h-screen max-w-7xl p-8 mx-auto">
       <h1 className="text-white text-3xl mb-5">{deal.title}</h1>
       <p className="text-white mb-2">{deal.description}</p>
       <p className="text-white text-lg font-semibold">Price: ${deal.price}</p>

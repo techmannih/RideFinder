@@ -16,7 +16,7 @@ const VehicleDeals = () => {
   }, [vehicleId, dispatch]);
 
   return (
-    <div className="bg-black min-h-screen p-6">
+    <div className="bg-black min-h-screen max-w-7xl p-8 mx-auto">
       <h1 className="text-3xl font-bold text-white mb-6">Deals for Vehicle</h1>
       {vehicleDeals && vehicleDeals.length > 0   ? (
         vehicleDeals.map((deal) => (
