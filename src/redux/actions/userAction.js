@@ -36,7 +36,7 @@ export const loginUser = (credentials) => async (dispatch) => {
     toast.success("Login successful");
   } catch (error) {
     console.error("Login failed:", error);
-    toast.error("Login failed: " + error.message);
+    toast.error("Login failed: " + error);
   }
 };
 
@@ -58,8 +58,9 @@ export const signupUser = (userData) => async (dispatch) => {
     dispatch(setUser(data.user));
     toast.success("Signup successful");
   } catch (error) {
-    console.error("Signup failed:", error);
-    toast.error("Signup failed: " + error.message);
+    // console.error("Signup failed:", error);
+    // console.log("Signup failed:", error.message);
+    toast.error("User with this email already exists.");
   }
 };
 
